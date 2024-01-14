@@ -55,8 +55,8 @@ android {
     defaultConfig {
         testApplicationId = "org.tasks.test"
         applicationId = "org.tasks"
-        versionCode = 130600
-        versionName = "13.6"
+        versionCode = 130605
+        versionName = "13.6.3"
         targetSdk = 33
         minSdk = 24
         testInstrumentationRunner = "org.tasks.TestRunner"
@@ -207,6 +207,7 @@ dependencies {
     debugImplementation(libs.kotlin.reflect)
 
     implementation(libs.kotlin.jdk8)
+    implementation(libs.kotlin.immutable)
     implementation(libs.okhttp)
     implementation(libs.persistent.cookiejar)
     implementation(libs.gson)

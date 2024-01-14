@@ -1,5 +1,6 @@
 package com.todoroo.astrid.service
 
+import com.todoroo.andlib.utility.AndroidUtilities
 import com.todoroo.andlib.utility.DateUtilities
 import com.todoroo.astrid.api.CaldavFilter
 import com.todoroo.astrid.api.Filter
@@ -123,7 +124,10 @@ class TaskCreator @Inject constructor(
     }
 
     suspend fun createWithValues(filter: Filter?, title: String?): Task {
-        return create(filter?.valuesForNewTasks, title)
+        return create(
+            AndroidUtilities.mapFromSerializedString(filter?.valuesForNewTasks),
+            title
+        )
     }
 
     /**
@@ -131,14 +135,13 @@ class TaskCreator @Inject constructor(
      * base task model.
      */
     internal suspend fun create(values: Map<String, Any>?, title: String?): Task {
-        val task = Task()
-        task.creationDate = DateUtilities.now()
-        task.modificationDate = DateUtilities.now()
-        if (title != null) {
-            task.title = title.trim { it <= ' ' }
-        }
-        task.uuid = UUIDHelper.newUUID()
-        task.priority = preferences.defaultPriority
+        val task = Task(
+            title = title?.trim { it <= ' ' },
+            creationDate = DateUtilities.now(),
+            modificationDate = DateUtilities.now(),
+            remoteId = UUIDHelper.newUUID(),
+            priority = preferences.defaultPriority,
+        )
         preferences.getStringValue(R.string.p_default_recurrence)
                 ?.takeIf { it.isNotBlank() }
                 ?.let {

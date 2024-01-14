@@ -69,8 +69,8 @@ restartable skippable fun ShowKeyboard(
 restartable skippable scheme("[androidx.compose.ui.UiComposable]") fun OutlinedIntInput(
   stable time: MutableState<Int>
   stable modifier: Modifier? = @static Companion
-  stable minValue: Int = @dynamic LiveLiterals$AddReminderDialogKt.Int$param-minValue$fun-OutlinedIntInput()
-  stable autoSelect: Boolean = @dynamic LiveLiterals$AddReminderDialogKt.Boolean$param-autoSelect$fun-OutlinedIntInput()
+  stable minValue: Int = @static 1
+  stable autoSelect: Boolean = @static true
 )
 restartable skippable scheme("[androidx.compose.ui.UiComposable]") fun CenteredH6(
   stable resId: Int
@@ -193,8 +193,8 @@ restartable skippable scheme("[androidx.compose.ui.UiComposable]") fun DisabledT
   stable text: String
   stable modifier: Modifier? = @static Companion
 )
-restartable scheme("[androidx.compose.ui.UiComposable]") fun FilterChip(
-  unstable filter: Filter
+restartable skippable scheme("[androidx.compose.ui.UiComposable]") fun FilterChip(
+  filter: Filter
   stable defaultIcon: Int
   stable showText: Boolean
   stable showIcon: Boolean
@@ -235,7 +235,7 @@ restartable skippable scheme("[androidx.compose.ui.UiComposable]") fun OutlinedN
 restartable scheme("[androidx.compose.ui.UiComposable, [androidx.compose.ui.UiComposable]]") fun Pager(
   unstable state: PagerState
   stable modifier: Modifier? = @static Companion
-  stable offscreenLimit: Int = @dynamic LiveLiterals$PagerKt.Int$param-offscreenLimit$fun-Pager()
+  stable offscreenLimit: Int = @static 2
   stable pageContent: @[ExtensionFunctionType] Function3<PagerScope, Composer, Int, Unit>
 )
 restartable skippable scheme("[androidx.compose.ui.UiComposable]") fun Owner()
@@ -289,16 +289,23 @@ restartable fun Spinner(
   stable onSelected: Function1<T, Unit>
   stable setExpanded: Function1<Boolean, Unit>
 )
+restartable skippable scheme("[androidx.compose.ui.UiComposable]") fun StartDateChip(
+  stable sortGroup: Long?
+  stable startDate: Long
+  stable compact: Boolean
+  stable timeOnly: Boolean
+  stable colorProvider: Function1<Int, Int>
+)
 restartable skippable scheme("[androidx.compose.ui.UiComposable]") fun PurchaseText(
   stable nameYourPrice: MutableState<Boolean>? = @dynamic mutableStateOf(
-  value   =   LiveLiterals$SubscriptionKt  .  Boolean$arg-0$call-mutableStateOf$param-nameYourPrice$fun-PurchaseText$class-PurchaseText  (  )
+  value   =   false
 )
   stable sliderPosition: MutableState<Float>? = @dynamic mutableStateOf(
-  value   =   LiveLiterals$SubscriptionKt  .  Float$arg-0$call-mutableStateOf$param-sliderPosition$fun-PurchaseText$class-PurchaseText  (  )
+  value   =   0.0f
 )
-  stable github: Boolean = @dynamic LiveLiterals$SubscriptionKt.Boolean$param-github$fun-PurchaseText$class-PurchaseText()
-  stable solidButton: Boolean = @dynamic LiveLiterals$SubscriptionKt.Boolean$param-solidButton$fun-PurchaseText$class-PurchaseText()
-  stable badge: Boolean = @dynamic LiveLiterals$SubscriptionKt.Boolean$param-badge$fun-PurchaseText$class-PurchaseText()
+  stable github: Boolean = @static false
+  stable solidButton: Boolean = @static false
+  stable badge: Boolean = @static false
   stable onDisplayed: Function0<Unit>? = @static {
 
 }
@@ -324,7 +331,7 @@ restartable scheme("[androidx.compose.ui.UiComposable]") fun GooglePlayButtons(
 )
 restartable skippable scheme("[androidx.compose.ui.UiComposable]") fun PagerItem(
   stable feature: CarouselItem
-  stable disabled: Boolean = @dynamic LiveLiterals$SubscriptionKt.Boolean$param-disabled$fun-PagerItem$class-PurchaseText()
+  stable disabled: Boolean = @static false
   unused unstable <this>: PurchaseText
 )
 restartable skippable scheme("[androidx.compose.ui.UiComposable]") fun TasksAccount(
@@ -333,8 +340,8 @@ restartable skippable scheme("[androidx.compose.ui.UiComposable]") fun TasksAcco
 )
 restartable skippable scheme("[androidx.compose.ui.UiComposable]") fun PurchaseButton(
   stable price: Int
-  stable monthly: Boolean = @dynamic LiveLiterals$SubscriptionKt.Boolean$param-monthly$fun-PurchaseButton$class-PurchaseText()
-  stable popperText: String? = @dynamic LiveLiterals$SubscriptionKt.String$param-popperText$fun-PurchaseButton$class-PurchaseText()
+  stable monthly: Boolean = @static false
+  stable popperText: String? = @static ""
   stable onClick: Function2<Int, Boolean, Unit>
   unused unstable <this>: PurchaseText
 )
@@ -368,15 +375,15 @@ restartable skippable scheme("[androidx.compose.ui.UiComposable]") fun TaskEditI
   stable modifier: Modifier? = @static Companion
 )
 restartable skippable scheme("[androidx.compose.ui.UiComposable, [androidx.compose.ui.UiComposable], [androidx.compose.ui.UiComposable]]") fun TaskEditRow(
-  stable iconRes: Int = @dynamic LiveLiterals$TaskEditRowKt.Int$param-iconRes$fun-TaskEditRow()
+  stable iconRes: Int = @static 0
   stable icon: Function2<Composer, Int, Unit>? = @static composableLambda($composer, -994143420, true) { $composer: Composer?, $changed: Int ->
   sourceInformation  (  $composer  ,   "C19@626L6,16@518L305:TaskEditRow.kt#pvtc9k"  )  
   if (  $changed   and   0b1011   !==   0b0010   ||   !  $composer  .  skipping  ) {
     if (    isTraceInProgress    (    )    ) {
-      traceEventStart      (      -994143420      ,       $changed      ,       -1      ,       "org.tasks.compose.TaskEditRow.<anonymous> (TaskEditRow.kt:15)"      )
+      traceEventStart      (      -994143420      ,       $changed      ,       -1      ,       "org.tasks.compose.TaskEditRow.<anonymous> (TaskEditRow.kt:16)"      )
     }
     
-    TaskEditIcon    (    iconRes    ,     Companion    .    alpha    (    ContentAlpha    .    <get-medium>    (    $composer    ,     ContentAlpha    .    $stable    )    )    .    padding    (    LiveLiterals$TaskEditRowKt    .    Int$$$this$call-$get-dp$$arg-0$call-padding$arg-1$call-TaskEditIcon$fun-$anonymous$$param-icon$fun-TaskEditRow    (    )    .    dp    ,     LiveLiterals$TaskEditRowKt    .    Int$$$this$call-$get-dp$$arg-1$call-padding$arg-1$call-TaskEditIcon$fun-$anonymous$$param-icon$fun-TaskEditRow    (    )    .    dp    ,     LiveLiterals$TaskEditRowKt    .    Int$$$this$call-$get-dp$$arg-2$call-padding$arg-1$call-TaskEditIcon$fun-$anonymous$$param-icon$fun-TaskEditRow    (    )    .    dp    ,     LiveLiterals$TaskEditRowKt    .    Int$$$this$call-$get-dp$$arg-3$call-padding$arg-1$call-TaskEditIcon$fun-$anonymous$$param-icon$fun-TaskEditRow    (    )    .    dp    )    ,     $composer    ,     0b1110     and     $dirty    ,     0    )    
+    TaskEditIcon    (    iconRes    ,     Companion    .    alpha    (    ContentAlpha    .    <get-medium>    (    $composer    ,     ContentAlpha    .    $stable    )    )    .    padding    (    16    .    dp    ,     20    .    dp    ,     32    .    dp    ,     20    .    dp    )    ,     $composer    ,     0b1110     and     $dirty    ,     0    )    
     if (    isTraceInProgress    (    )    ) {
       traceEventEnd      (      )
     }
@@ -390,6 +397,127 @@ restartable skippable scheme("[androidx.compose.ui.UiComposable, [androidx.compo
   stable content: Function2<Composer, Int, Unit>
   stable onClick: Function0<Unit>? = @static null
 )
+restartable skippable scheme("[androidx.compose.ui.UiComposable, [androidx.compose.ui.UiComposable], [androidx.compose.ui.UiComposable]]") fun ModalBottomSheet(
+  stable onDismissRequest: Function0<Unit>
+  stable modifier: Modifier? = @static Companion
+  stable sheetState: SheetState? = @dynamic rememberModalBottomSheetState(false, null, $composer, 0, 0b0011)
+  stable shape: Shape? = @dynamic BottomSheetDefaults.<get-ExpandedShape>($composer, 0b0110)
+  stable containerColor: Color = @dynamic BottomSheetDefaults.<get-ContainerColor>($composer, 0b0110)
+  stable contentColor: Color = @dynamic contentColorFor(containerColor, $composer, 0b1110 and $dirty shr 0b1100)
+  stable tonalElevation: Dp = @static BottomSheetDefaults.Elevation
+  stable scrimColor: Color = @dynamic BottomSheetDefaults.<get-ScrimColor>($composer, 0b0110)
+  stable dragHandle: Function2<Composer, Int, Unit>? = @static ComposableSingletons$ModalBottomSheetKt.lambda-1
+  stable windowInsets: WindowInsets? = @dynamic BottomSheetDefaults.<get-windowInsets>($composer, 0b0110)
+  stable content: @[ExtensionFunctionType] Function3<ColumnScope, Composer, Int, Unit>
+)
+restartable skippable scheme("[androidx.compose.ui.UiComposable, [androidx.compose.ui.UiComposable], [androidx.compose.ui.UiComposable]]") fun ModalBottomSheet(
+  stable onDismissRequest: Function0<Unit>
+  stable modifier: Modifier? = @static Companion
+  stable sheetState: SheetState? = @dynamic rememberModalBottomSheetState(false, null, $composer, 0, 0b0011)
+  stable shape: Shape? = @dynamic BottomSheetDefaults.<get-ExpandedShape>($composer, 0b0110)
+  stable containerColor: Color = @dynamic BottomSheetDefaults.<get-ContainerColor>($composer, 0b0110)
+  stable contentColor: Color = @dynamic contentColorFor(containerColor, $composer, 0b1110 and $dirty shr 0b1100)
+  stable tonalElevation: Dp = @static BottomSheetDefaults.Elevation
+  stable scrimColor: Color = @dynamic BottomSheetDefaults.<get-ScrimColor>($composer, 0b0110)
+  stable dragHandle: Function2<Composer, Int, Unit>? = @static ComposableSingletons$ModalBottomSheetKt.lambda-2
+  stable content: @[ExtensionFunctionType] Function3<ColumnScope, Composer, Int, Unit>
+)
+fun rememberModalBottomSheetState(
+  stable skipPartiallyExpanded: Boolean = @static false
+  stable confirmValueChange: Function1<SheetValue, Boolean>? = @static { it: SheetValue ->
+  true
+}
+
+): SheetState
+restartable skippable scheme("[androidx.compose.ui.UiComposable]") fun Scrim(
+  stable color: Color
+  stable onDismissRequest: Function0<Unit>
+  stable visible: Boolean
+)
+restartable skippable scheme("[androidx.compose.ui.UiComposable, [androidx.compose.ui.UiComposable]]") fun ModalBottomSheetPopup(
+  stable onDismissRequest: Function0<Unit>
+  stable windowInsets: WindowInsets
+  stable content: Function2<Composer, Int, Unit>
+)
+restartable fun Content(
+  unstable <this>: ModalBottomSheetWindow
+)
+fun <get-ExpandedShape>(
+  unused stable <this>: BottomSheetDefaults
+): Shape
+fun <get-ContainerColor>(
+  unused stable <this>: BottomSheetDefaults
+): Color
+fun <get-ScrimColor>(
+  unused stable <this>: BottomSheetDefaults
+): Color
+fun <get-windowInsets>(
+  unused stable <this>: BottomSheetDefaults
+): WindowInsets
+restartable skippable scheme("[androidx.compose.ui.UiComposable]") fun DragHandle(
+  stable modifier: Modifier? = @static Companion
+  stable width: Dp = @static 32.dp
+  stable height: Dp = @static 4.dp
+  stable shape: Shape? = @dynamic MaterialTheme.<get-shapes>($composer, MaterialTheme.$stable).extraLarge
+  stable color: Color = @dynamic MaterialTheme.<get-colorScheme>($composer, MaterialTheme.$stable).onSurfaceVariant.copy(
+  alpha   =   0.4f
+)
+  unused stable <this>: BottomSheetDefaults
+)
+fun rememberSheetState(
+  stable skipPartiallyExpanded: Boolean = @static false
+  stable confirmValueChange: Function1<SheetValue, Boolean>? = @static { it: SheetValue ->
+  true
+}
+
+  stable initialValue: SheetValue? = @static SheetValue.Hidden
+  stable skipHiddenState: Boolean = @static false
+): SheetState
+fun rememberSwipeableV2State(
+  initialValue: T
+  unstable animationSpec: AnimationSpec<Float>? = @static SwipeableV2Defaults.AnimationSpec
+  stable confirmValueChange: Function1<@[ParameterName(name = 'newValue')] T, Boolean>? = @static { it: T ->
+  true
+}
+
+): SwipeableV2State<T>
+restartable skippable scheme("[androidx.compose.ui.UiComposable]") fun TaskListDrawer(
+  stable begForMoney: Boolean
+  filters: ImmutableList<DrawerItem>
+  stable onClick: Function1<DrawerItem, Unit>
+  stable onDrawerAction: Function1<DrawerAction, Unit>
+  stable onAddClick: Function1<Header, Unit>
+  stable onErrorClick: Function0<Unit>
+)
+restartable skippable scheme("[androidx.compose.ui.UiComposable]") fun FilterItem(
+  stable item: Filter
+  stable onClick: Function0<Unit>
+)
+restartable skippable scheme("[androidx.compose.ui.UiComposable]") fun MenuAction(
+  stable icon: Int
+  stable title: Int
+  stable onClick: Function0<Unit>
+)
+restartable skippable scheme("[androidx.compose.ui.UiComposable]") fun DrawerIcon(
+  stable icon: Int
+  stable color: Int = @static 0
+)
+restartable skippable scheme("[androidx.compose.ui.UiComposable]") fun HeaderItem(
+  stable item: Header
+  stable canAdd: Boolean
+  stable toggleCollapsed: Function0<Unit>
+  stable onAddClick: Function0<Unit>
+  stable onErrorClick: Function0<Unit>
+)
+restartable skippable scheme("[androidx.compose.ui.UiComposable, [androidx.compose.ui.UiComposable]]") fun MenuRow(
+  stable modifier: Modifier? = @static Companion
+  stable padding: PaddingValues? = @static PaddingValues(
+  horizontal   =   16  .  dp
+)
+  stable onClick: Function0<Unit>
+  stable content: @[ExtensionFunctionType] Function3<RowScope, Composer, Int, Unit>
+)
+restartable skippable scheme("[androidx.compose.ui.UiComposable]") fun MenuPreview()
 restartable scheme("[androidx.compose.ui.UiComposable]") fun AlarmRow(
   unstable vm: ReminderControlSetViewModel? = @dynamic viewModel(null, null, null, null, $composer, 0, 0b1111)
   stable permissionStatus: PermissionStatus
@@ -482,8 +610,8 @@ restartable skippable scheme("[androidx.compose.ui.UiComposable]") fun InfoRow(
   unstable locale: Locale? = @dynamic getDefault()
 )
 restartable skippable scheme("[androidx.compose.ui.UiComposable]") fun InfoPreview()
-restartable scheme("[androidx.compose.ui.UiComposable]") fun ListRow(
-  unstable list: Filter?
+restartable skippable scheme("[androidx.compose.ui.UiComposable]") fun ListRow(
+  list: Filter?
   stable colorProvider: Function1<Int, Int>
   stable onClick: Function0<Unit>
 )
@@ -508,6 +636,14 @@ restartable skippable scheme("[androidx.compose.ui.UiComposable]") fun PriorityR
   stable desaturate: Boolean
 )
 restartable skippable scheme("[androidx.compose.ui.UiComposable]") fun Priority(
+  stable selected: Int
+  stable onClick: Function1<Int, Unit>? = @static { it: Int ->
+
+}
+
+  stable desaturate: Boolean
+)
+restartable skippable scheme("[androidx.compose.ui.UiComposable]") fun PriorityLabeled(
   stable selected: Int
   stable onClick: Function1<Int, Unit>? = @static { it: Int ->
 
@@ -559,8 +695,8 @@ restartable skippable scheme("[androidx.compose.ui.UiComposable]") fun NoStartDa
 restartable skippable scheme("[androidx.compose.ui.UiComposable]") fun FutureStartDate()
 restartable skippable scheme("[androidx.compose.ui.UiComposable]") fun PastStartDate()
 restartable scheme("[androidx.compose.ui.UiComposable]") fun SubtaskRow(
-  unstable originalFilter: Filter?
-  unstable filter: Filter?
+  originalFilter: Filter?
+  filter: Filter?
   stable hasParent: Boolean
   stable desaturate: Boolean
   unstable existingSubtasks: List<TaskContainer>
@@ -693,9 +829,9 @@ restartable skippable scheme("[androidx.compose.ui.UiComposable]") fun DatePicke
   stable dismiss: Function0<Unit>
 )
 restartable skippable scheme("[androidx.compose.ui.UiComposable]") fun DatePickerPreview()
-restartable scheme("[androidx.compose.ui.UiComposable]") fun FilterPicker(
+restartable skippable scheme("[androidx.compose.ui.UiComposable]") fun FilterPicker(
   unstable viewModel: FilterPickerViewModel? = @dynamic viewModel(null, null, null, null, $composer, 0, 0b1111)
-  unstable selected: Filter?
+  selected: Filter?
   stable onSelected: Function1<Filter, Unit>
 )
 restartable skippable scheme("[androidx.compose.ui.UiComposable]") fun SortSheetContent(
@@ -715,7 +851,7 @@ restartable scheme("[androidx.compose.ui.UiComposable]") fun SortPicker(
 restartable skippable scheme("[androidx.compose.ui.UiComposable]") fun SortOption(
   stable resId: Int
   stable selected: Boolean
-  stable enabled: Boolean = @dynamic LiveLiterals$SortSettingsActivityKt.Boolean$param-enabled$fun-SortOption()
+  stable enabled: Boolean = @static true
   stable onClick: Function0<Unit>
 )
 restartable skippable scheme("[androidx.compose.ui.UiComposable]") fun BottomSheetContent(
@@ -749,7 +885,7 @@ restartable skippable scheme("[androidx.compose.ui.UiComposable]") fun SortRow(
   sortMode  .  modeString
 }
 , $composer, 0b1110 and $dirty shr 0b1001)
-  stable showAscending: Boolean = @dynamic LiveLiterals$SortSettingsActivityKt.Boolean$param-showAscending$fun-SortRow()
+  stable showAscending: Boolean = @static true
   stable onClick: Function0<Unit>
   stable setAscending: Function1<Boolean, Unit>
 )
@@ -758,29 +894,3 @@ restartable skippable scheme("[androidx.compose.ui.UiComposable]") fun OrderingB
   stable onClick: Function0<Unit>
 )
 restartable skippable scheme("[androidx.compose.ui.UiComposable]") fun PreviewSortBottomSheet()
-restartable scheme("[androidx.compose.ui.UiComposable]") fun StartDateChip(
-  stable sortGroup: Long?
-  stable startDate: Long
-  stable compact: Boolean
-  stable timeOnly: Boolean
-  unstable <this>: ChipProvider
-)
-restartable scheme("[androidx.compose.ui.UiComposable]") fun Chips(
-  unstable filter: Filter?
-  stable id: Long
-  stable children: Int
-  stable collapsed: Boolean
-  stable isHidden: Boolean
-  stable sortGroup: Long?
-  stable startDate: Long
-  stable place: Place?
-  stable tagsString: String?
-  stable sortByStartDate: Boolean
-  stable sortByList: Boolean
-  stable list: String?
-  stable isSubtask: Boolean
-  stable isGoogleTask: Boolean
-  stable toggleSubtasks: Function2<Long, Boolean, Unit>
-  stable onClick: Function1<Filter, Unit>
-  unstable <this>: ChipProvider
-)

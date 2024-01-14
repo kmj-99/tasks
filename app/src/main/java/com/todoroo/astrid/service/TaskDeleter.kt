@@ -1,6 +1,7 @@
 package com.todoroo.astrid.service
 
 import com.todoroo.astrid.api.Filter
+import com.todoroo.astrid.api.FilterImpl
 import com.todoroo.astrid.data.Task
 import org.tasks.LocalBroadcastManager
 import org.tasks.caldav.VtodoCache
@@ -43,9 +44,9 @@ class TaskDeleter @Inject constructor(
     }
 
     suspend fun clearCompleted(filter: Filter): Int {
-        val deleteFilter = Filter(null, null)
-        deleteFilter.setFilterQueryOverride(
-                QueryUtils.removeOrder(QueryUtils.showHiddenAndCompleted(filter.originalSqlQuery)))
+        val deleteFilter = FilterImpl(
+            sql = QueryUtils.removeOrder(QueryUtils.showHiddenAndCompleted(filter.sql!!)),
+        )
         val completed = taskDao.fetchTasks(preferences, deleteFilter)
                 .filter(TaskContainer::isCompleted)
                 .filterNot(TaskContainer::isReadOnly)

@@ -6,6 +6,8 @@ import android.content.Context
 import android.content.Intent
 import androidx.core.app.NotificationCompat
 import com.todoroo.andlib.utility.AndroidUtilities
+import com.todoroo.andlib.utility.AndroidUtilities.preUpsideDownCake
+import com.todoroo.astrid.core.BuiltInFilterExposer
 import dagger.hilt.android.qualifiers.ApplicationContext
 import org.tasks.LocalBroadcastManager
 import org.tasks.R
@@ -13,7 +15,6 @@ import org.tasks.Strings.isNullOrEmpty
 import org.tasks.data.Alarm
 import org.tasks.data.LocationDao
 import org.tasks.data.TaskDao
-import org.tasks.filters.NotificationsFilter
 import org.tasks.intents.TaskIntents
 import org.tasks.markdown.MarkdownProvider
 import org.tasks.preferences.PermissionChecker
@@ -175,7 +176,9 @@ class NotificationManager @Inject constructor(
             alert: Boolean,
             nonstop: Boolean,
             fiveTimes: Boolean) {
-        builder.setLocalOnly(!preferences.getBoolean(R.string.p_wearable_notifications, true))
+        if (preUpsideDownCake()) {
+            builder.setLocalOnly(!preferences.getBoolean(R.string.p_wearable_notifications, true))
+        }
         if (AndroidUtilities.preOreo()) {
             if (alert) {
                 builder
@@ -253,7 +256,7 @@ class NotificationManager @Inject constructor(
                         PendingIntent.getActivity(
                                 context,
                                 0,
-                                TaskIntents.getTaskListIntent(context, NotificationsFilter(context)),
+                                TaskIntents.getTaskListIntent(context, BuiltInFilterExposer.getNotificationsFilter(context)),
                             PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
                         )
                 )

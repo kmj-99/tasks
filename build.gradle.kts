@@ -1,5 +1,5 @@
 plugins {
-    id("com.google.devtools.ksp") version "1.9.10-1.0.13" apply false
+    id("com.google.devtools.ksp") version "1.9.21-1.0.16" apply false
 }
 
 buildscript {
@@ -19,6 +19,6 @@ buildscript {
 }
 
 tasks.getByName<Wrapper>("wrapper") {
-    gradleVersion = "8.3"
+    gradleVersion = "8.5"
     distributionType = Wrapper.DistributionType.ALL
 }

@@ -1,6 +1,11 @@
 package org.tasks.data
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.Query
+import androidx.room.RawQuery
+import androidx.room.Update
+import androidx.room.withTransaction
 import androidx.sqlite.db.SimpleSQLiteQuery
 import com.todoroo.andlib.sql.Criterion
 import com.todoroo.andlib.sql.Field
@@ -37,7 +42,7 @@ abstract class TaskDao(private val database: Database) {
     @Query("SELECT COUNT(1) FROM tasks WHERE timerStart > 0 AND deleted = 0")
     abstract suspend fun activeTimers(): Int
 
-    @Query("SELECT COUNT(1) FROM tasks INNER JOIN alarms ON tasks._id = alarms.task WHERE type = $TYPE_SNOOZE")
+    @Query("SELECT COUNT(1) FROM tasks INNER JOIN alarms ON tasks._id = alarms.task WHERE deleted = 0 AND completed = 0 AND type = $TYPE_SNOOZE")
     abstract suspend fun snoozedReminders(): Int
 
     @Query("SELECT COUNT(1) FROM tasks INNER JOIN notification ON tasks._id = notification.task")
@@ -210,14 +215,14 @@ FROM recursive_tasks
     }
 
     suspend fun count(filter: Filter): Int {
-        val query = getQuery(filter.sqlQuery, Field.COUNT)
+        val query = getQuery(filter.sql!!, Field.COUNT)
         val start = if (BuildConfig.DEBUG) now() else 0
         val count = count(query)
         Timber.v("%sms: %s", now() - start, query.sql)
         return count
     }
 
-    suspend fun fetchFiltered(filter: Filter): List<Task> = fetchFiltered(filter.getSqlQuery())
+    suspend fun fetchFiltered(filter: Filter): List<Task> = fetchFiltered(filter.sql!!)
 
     suspend fun fetchFiltered(queryTemplate: String): List<Task> {
         val query = getQuery(queryTemplate, Task.FIELDS)

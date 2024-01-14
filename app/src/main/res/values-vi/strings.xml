@@ -186,7 +186,7 @@
     <string name="auto_dismiss_datetime_widget">Tiện ích</string>
     <string name="auto_dismiss_datetime_edit_summary">Tự động đóng khi chọn từ mục chỉnh sửa công việc</string>
     <string name="cancel">Huỷ</string>
-    <string name="ok">OK</string>
+    <string name="ok">Ôkê</string>
     <string name="auto_dismiss_datetime_edit">Chỉnh sửa công việc</string>
     <string name="auto_dismiss_datetime_list_summary">Tự động đóng khi chọn từ danh sách công việc</string>
     <string name="auto_dismiss_datetime_list">Danh sách công việc</string>
@@ -705,4 +705,5 @@
     <string name="sort_ascending">Tăng dần</string>
     <string name="sort_descending">Giảm dần</string>
     <string name="sort_completed">Theo thời gian hoàn thành</string>
+    <string name="change_priority">Thay đổi mức độ ưu tiên</string>
 </resources>

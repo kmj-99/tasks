@@ -33,7 +33,7 @@ internal class SubheaderViewHolder(
     fun bind(subheader: NavigationDrawerSubheader) {
         add.isVisible = subheader.addIntent != null
         this.subheader = subheader
-        text.text = subheader.listingTitle
+        text.text = subheader.title
         when {
             subheader.error || subheader.subheaderType == ETESYNC ->
                 with(errorIcon) {

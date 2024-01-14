@@ -8,11 +8,15 @@ import kotlinx.coroutines.launch
 import org.tasks.LocalBroadcastManager
 import org.tasks.data.CaldavDao
 import org.tasks.dialogs.NewFilterDialog
+import org.tasks.filters.FilterProvider
 import org.tasks.filters.NavigationDrawerSubheader
-import org.tasks.filters.NavigationDrawerSubheader.SubheaderType.*
+import org.tasks.filters.NavigationDrawerSubheader.SubheaderType.CALDAV
+import org.tasks.filters.NavigationDrawerSubheader.SubheaderType.ETESYNC
+import org.tasks.filters.NavigationDrawerSubheader.SubheaderType.GOOGLE_TASKS
+import org.tasks.filters.NavigationDrawerSubheader.SubheaderType.PREFERENCE
+import org.tasks.filters.NavigationDrawerSubheader.SubheaderType.TASKS
 import org.tasks.preferences.MainPreferences
 import org.tasks.preferences.Preferences
-import org.tasks.ui.NavigationDrawerFragment
 import javax.inject.Inject
 
 class SubheaderClickHandler @Inject constructor(
@@ -30,6 +34,7 @@ class SubheaderClickHandler @Inject constructor(
                 CALDAV,
                 TASKS,
                 ETESYNC -> caldavDao.setCollapsed(subheader.id, collapsed)
+                else -> throw IllegalArgumentException()
             }
             localBroadcastManager.broadcastRefreshList()
         }
@@ -37,7 +42,7 @@ class SubheaderClickHandler @Inject constructor(
 
     override fun onAdd(subheader: NavigationDrawerSubheader) {
         when (subheader.addIntentRc) {
-            NavigationDrawerFragment.REQUEST_NEW_FILTER ->
+            FilterProvider.REQUEST_NEW_FILTER ->
                 NewFilterDialog.newFilterDialog().show(
                     (activity as AppCompatActivity).supportFragmentManager,
                     FRAG_TAG_NEW_FILTER
@@ -50,6 +55,6 @@ class SubheaderClickHandler @Inject constructor(
         activity.startActivity(Intent(activity, MainPreferences::class.java))
 
     companion object {
-        private const val FRAG_TAG_NEW_FILTER = "frag_tag_new_filter"
+        const val FRAG_TAG_NEW_FILTER = "frag_tag_new_filter"
     }
 }

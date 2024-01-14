@@ -13,7 +13,6 @@ import org.tasks.activities.CameraActivity
 import org.tasks.extensions.Fragment.safeStartActivityForResult
 import org.tasks.files.FileHelper.newFilePickerIntent
 import org.tasks.preferences.Device
-import java.util.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -61,6 +60,7 @@ class AddAttachmentDialog : DialogFragment() {
         targetFragment?.safeStartActivityForResult(
                 Intent(Intent.ACTION_PICK).apply {
                     setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*")
+                    putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
                 },
                 REQUEST_GALLERY
         )
@@ -68,7 +68,11 @@ class AddAttachmentDialog : DialogFragment() {
 
     private fun pickFromStorage() {
         targetFragment?.safeStartActivityForResult(
-                newFilePickerIntent(activity, null),
+                newFilePickerIntent(
+                    activity = activity,
+                    initial = null,
+                    allowMultiple = true,
+                ),
                 REQUEST_STORAGE
         )
     }

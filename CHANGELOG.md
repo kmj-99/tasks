@@ -1,8 +1,39 @@
-### 13.6 (2023-09-17)
+### 13.6.3 (2023-11-25)
+
+* Revert "Preserve modification times on initial sync" [#2460](https://github.com/tasks/tasks/issues/2640)
+* Fix unnecessary DecSync work
+
+### 13.6.2 (2023-10-30)
+
+* Fix updating modification timestamp on edits
+
+### 13.6.1 (2023-10-27)
+
+* Push pending changes when app is backgrounded
+* Don't require internet connection for DAVx5/EteSync/DecSync sync
+* Don't perform background sync for DAVx5/EteSync/DecSync
+  * Background sync is performed by the sync app
+* Preserve modification times on initial sync [#2496](https://github.com/tasks/tasks/issues/2496)
+* Replace deprecated method call [#2547](https://github.com/tasks/tasks/pull/2547) - @kmj-99
+* Improve task list scrolling performance
+* Fix hourly recurrence bug
+* Update translations
+  * Chinese (Simplified) - Eric
+  * Croatian - @milotype
+  * Czech - @ceskyDJ
+  * Finnish - @millerii
+  * French - Lionel HANNEQUIN, Bruno Duyé
+  * Japanese - Kazushi Hayama
+  * Portuguese - @loucurapt
+  * Romanian - @ygorigor
+  * Swedish - @bittin
+
+### 13.6 (2023-10-07)
 
 * Change priority with multi-select [#2257](https://github.com/tasks/tasks/pull/2452) - @vulewuxe86
 * Automatically select newly copied tasks [#2246](https://github.com/tasks/tasks/pull/2446) - @vulewuxe86
 * Reduce minimum size for widgets [#2436](https://github.com/tasks/tasks/pull/2436) - @histefanhere
+* Replace deprecated method call [#2526](https://github.com/tasks/tasks/pull/2526) - @kmj-99
 * Improve handling text shared to Tasks [#2485](https://github.com/tasks/tasks/issues/2485)
 * Use notification audio stream for completion sound
 * Notification preference 'More settings' opens channel settings directly
@@ -15,11 +46,16 @@
   * Catalan - Joan Montané
   * Chinese (Simplified) - Poesty Li
   * Chinese (Traditional) - @abc0922001
-  * German - @qwerty287, deep map
+  * Dutch - @fvbommel
+  * French - @FlorianLeChat
+  * German - @qwerty287, deep map, @franconian
+  * Hungarian - Kaci
   * Italian - @ppasserini
   * Japanese - Kazushi Hayama, Naga
+  * Spanish - @FlorianLeChat
   * Swedish - @Anaemix, @bittin
-  * Turkish - @emintufan
+  * Turkish - @emintufan, @oersen
+  * Ukrainian - @IhorHordiichuk
 
 ### 13.5.1 (2023-08-02)
 

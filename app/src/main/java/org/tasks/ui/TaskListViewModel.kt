@@ -15,6 +15,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
@@ -47,11 +48,16 @@ class TaskListViewModel @Inject constructor(
     private val firebase: Firebase,
 ) : ViewModel() {
 
+    sealed interface TasksResults {
+        data object Loading : TasksResults
+        data class Results(val tasks: List<TaskContainer>) : TasksResults
+    }
+
     data class State(
         val filter: Filter? = null,
         val now: Long = DateUtilities.now(),
         val searchQuery: String? = null,
-        val tasks: List<TaskContainer> = emptyList(),
+        val tasks: TasksResults = TasksResults.Loading,
         val begForSubscription: Boolean = false,
         val syncOngoing: Boolean = false,
     )
@@ -105,6 +111,8 @@ class TaskListViewModel @Inject constructor(
 
         _state
             .filter { it.filter != null }
+            .map { it.copy(tasks = TasksResults.Loading) }
+            .distinctUntilChanged()
             .throttleLatest(333)
             .map {
                 val filter = when {
@@ -116,7 +124,7 @@ class TaskListViewModel @Inject constructor(
             }
             .onEach { tasks ->
                 _state.update {
-                    it.copy(tasks = tasks)
+                    it.copy(tasks = TasksResults.Results(tasks))
                 }
             }
             .flowOn(Dispatchers.Default)
