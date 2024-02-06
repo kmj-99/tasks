@@ -29,7 +29,6 @@ import org.tasks.jobs.DriveUploader.Companion.EXTRA_URI
 import org.tasks.jobs.MigrateLocalWork.Companion.EXTRA_ACCOUNT
 import org.tasks.jobs.SyncWork.Companion.EXTRA_BACKGROUND
 import org.tasks.jobs.SyncWork.Companion.EXTRA_IMMEDIATE
-import org.tasks.jobs.WorkManager.Companion.MAX_CLEANUP_LENGTH
 import org.tasks.jobs.WorkManager.Companion.REMOTE_CONFIG_INTERVAL_HOURS
 import org.tasks.jobs.WorkManager.Companion.TAG_BACKGROUND_SYNC
 import org.tasks.jobs.WorkManager.Companion.TAG_BACKUP
@@ -57,16 +56,6 @@ class WorkManagerImpl(
     private val alarmManager: AlarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
     private val workManager = androidx.work.WorkManager.getInstance(context)
 
-    override fun scheduleRepeat(task: Task) {
-        enqueue(
-            OneTimeWorkRequest.Builder(AfterSaveWork::class.java)
-                .setInputData(
-                    AfterSaveWork.EXTRA_ID to task.id,
-                    AfterSaveWork.EXTRA_SUPPRESS_COMPLETION_SNACKBAR to task.isSuppressRefresh()
-                )
-        )
-    }
-
     override fun updateCalendar(task: Task) {
         enqueue(
             OneTimeWorkRequest.Builder(UpdateCalendarWork::class.java)
@@ -80,15 +69,6 @@ class WorkManagerImpl(
                 .setInputData(EXTRA_ACCOUNT to caldavAccount.uuid)
                 .setConstraints(networkConstraints)
         enqueue(workManager.beginUniqueWork(TAG_MIGRATE_LOCAL, APPEND_OR_REPLACE, builder.build()))
-    }
-
-    override fun cleanup(ids: Iterable<Long>) {
-        ids.chunked(MAX_CLEANUP_LENGTH) {
-            enqueue(
-                OneTimeWorkRequest.Builder(CleanupWork::class.java)
-                    .setInputData(CleanupWork.EXTRA_TASK_IDS to it.toLongArray())
-            )
-        }
     }
 
     override suspend fun startEnqueuedSync() {

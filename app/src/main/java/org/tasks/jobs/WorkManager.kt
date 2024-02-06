@@ -8,11 +8,7 @@ import org.tasks.data.Place
 
 interface WorkManager {
 
-    fun scheduleRepeat(task: Task)
-
     fun updateCalendar(task: Task)
-
-    fun cleanup(ids: Iterable<Long>)
 
     fun migrateLocalTasks(caldavAccount: CaldavAccount)
 
@@ -42,7 +38,6 @@ interface WorkManager {
 
     companion object {
         val REMOTE_CONFIG_INTERVAL_HOURS = if (BuildConfig.DEBUG) 1 else 12.toLong()
-        const val MAX_CLEANUP_LENGTH = 500
         const val TAG_BACKUP = "tag_backup"
         const val TAG_REFRESH = "tag_refresh"
         const val TAG_MIDNIGHT_REFRESH = "tag_midnight_refresh"

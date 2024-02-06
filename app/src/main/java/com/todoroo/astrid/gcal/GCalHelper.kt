@@ -21,7 +21,7 @@ import org.tasks.data.TaskDao
 import org.tasks.preferences.PermissionChecker
 import org.tasks.preferences.Preferences
 import timber.log.Timber
-import java.util.*
+import java.util.TimeZone
 import javax.inject.Inject
 
 class GCalHelper @Inject constructor(
@@ -135,7 +135,7 @@ class GCalHelper @Inject constructor(
         val dueDate = task.dueDate
         val tzCorrectedDueDate = dueDate + TimeZone.getDefault().getOffset(dueDate)
         val tzCorrectedDueDateNow = DateUtilities.now() + TimeZone.getDefault().getOffset(DateUtilities.now())
-        // FIXME: doesnt respect timezones, see story 17443653
+        // FIXME: doesn't respect timezones, see story 17443653
         if (task.hasDueDate()) {
             if (task.hasDueTime()) {
                 var estimatedTime = task.estimatedSeconds * 1000.toLong()
